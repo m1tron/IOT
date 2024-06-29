@@ -41,11 +41,11 @@ To program the Pico, a Windows machine was used running Visual Studio Code with 
 
 Programming can now commence by making a new project in Pymakr.
 
-![[img/Pasted image 20240629221654.png]]
+![](img/pymakr.png)
 
 First click the Pymakr icon (bottom left), and select *New Project*.  After selecting a folder you will get the option to select a COM port, in my case I could select 1,3 or 4. If you are uncertain, you can try this procedure with and without the Pico connected and the correct COM port will be apparent. In the screenshot, the Pico is added successfully, and the lightning symbol can be clicked to connect to the device, which will then look like this:
 
-![[img/Pasted image 20240629222040.png]]
+!![](img/pymakr_options.png)
 
 To upload files from you project folder, the arrow into the cloud can be clicked and after a second or two the files will be loaded on the device. The Pico will normally look for two python files, *boot.py* and *main.py*. The first one will run directly after booting followed by the *main.py*. In my case, only a main file was used. Instead of rebooting the device to run the code, I clicked the terminal icon and entered `exec(open('main.py').read())`. Execution is easily stopped using the universal Ctrl+C command.
 
@@ -56,8 +56,7 @@ GPIO26 is connected to the Reed Sensor that can sense the presence of a magnetic
 
 GPIO27 is connected to the DHT 11 Sensor to read temperature and humidity.
 
-
-![[Pasted image 20240629232550.png]]
+![](img/circuit_diagram.png)
 
 
 
@@ -67,7 +66,7 @@ GPIO27 is connected to the DHT 11 Sensor to read temperature and humidity.
 To gather and visualize data, Adafruit was selected since it is easy to setup with a free account. In the future, when my Raspberry Pi 4 arrives, it will run the TIG stack for both privacy and update frequency (limited on Adafruit free tier) reasons.
 
 Adafruit provides an easy way to setup different feeds and a dashboard for visualzing the data. A separate feed is used for each sensor value. After selecting visualization blocks, the dashboard looks like this.
- ![[Pasted image 20240630000122.png]]
+ ![](img/dashboard.png)
 
 ---
 
@@ -153,6 +152,6 @@ The MQTT protocol was used since Adafruit is used to visualize the data, while a
 
 The final product in all its glory.
 
-![[Pasted image 20240629231342.png]]
+![](img/final_design.png)
 
 Since this device will be placed in the attic, it might remain in its breadboard form. However, a simple cardboard box or other enclosure will probably be used to protect it from dust. The device can also run on batteries, but I am still missing a Schottky diode before both power sources can be connected at the same time (to prevent back feed). This will enable power redundancy, letting the system continuing to deliver updates even during a power outage. A free GPIO pin could even be used to monitor the VBUS pin to detect when this happens and publish this information.
