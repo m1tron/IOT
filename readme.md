@@ -61,12 +61,11 @@ GPIO27 is connected to the DHT 11 Sensor to read temperature and humidity.
 
 
 --- 
-### Visualization of data
+### Platform 
 
-To gather and visualize data, Adafruit was selected since it is easy to setup with a free account. In the future, when my Raspberry Pi 4 arrives, it will run the TIG stack for both privacy and update frequency (limited on Adafruit free tier) reasons.
+To gather and visualize data, Adafruit was selected since it is easy to setup with a free account in the cloud. In the future, when my Raspberry Pi 4 arrives, it will run the TIG stack for both privacy and update frequency (limited on Adafruit free tier) reasons.
 
-Adafruit provides an easy way to setup different feeds and a dashboard for visualzing the data. A separate feed is used for each sensor value. After selecting visualization blocks, the dashboard looks like this.
- ![](img/dashboard.png)
+Adafruit provides an easy way to setup different feeds and a dashboard for visualzing the data. A separate feed is used for each sensor value. 
 
 ---
 
@@ -148,6 +147,25 @@ The MQTT protocol was used since Adafruit is used to visualize the data, while a
 
 ---
 
+### Presenting the data
+
+This is the final dashboard as setup on Adafruit. 
+ ![](img/dashboard.png)
+
+
+- m1tron/feeds/temp - This feed is used for the temp gauge, log messages, and in the 24h graph. Updated every 20 sec.
+- m1tron/feeds/humid - This feed is used for the humidity gauge, log messages, and in the 24h graph. Updated every 20 sec.
+- m1tron/feeds/reed - Used to display if the door is opened. The bottom left box here indicated an open door, when closed it turns red. Updated every 5 sec.
+
+The temp value is the only one with a trigger and action.
+ ![](img/trigger.png)
+
+When the temperature drops below 5 degrees Celsius, an email will be sent to notify me. In theory, this should give me enough time to reach the Cabin and prevent the water pipes from freezing.
+
+
+
+--- 
+
 ### Final Design
 
 The final product in all its glory.
@@ -155,3 +173,7 @@ The final product in all its glory.
 ![](img/final_design.png)
 
 Since this device will be placed in the attic, it might remain in its breadboard form. However, a simple cardboard box or other enclosure will probably be used to protect it from dust. The device can also run on batteries, but I am still missing a Schottky diode before both power sources can be connected at the same time (to prevent back feed). This will enable power redundancy, letting the system continuing to deliver updates even during a power outage. A free GPIO pin could even be used to monitor the VBUS pin to detect when this happens and publish this information.
+
+The solution could be improved as described above, and of course, it would also be interesting to place temperature sensors around the house. The DHT 11 Sensor allows for cabling up to 20 meters which would allow one to easily place one in every room.
+
+Complete power monitoring would also be nice. Tracking the incoming voltage supply for each phase. So there is definitely room for improvement.
