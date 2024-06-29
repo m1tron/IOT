@@ -28,10 +28,10 @@ def send_temp_humid():
         log_str = "Temperature is {} degrees Celsius and Humidity is {}%".format(temperature, humidity)
 
         print("Publishing: {0} to {1} ... ".format(temperature, keys.AIO_TEMP_FEED), end='')
-        #print("Publishing: {0} to {1} ... ".format(humidity, keys.AIO_HUMID_FEED), end='')
+        print("Publishing: {0} to {1} ... ".format(humidity, keys.AIO_HUMID_FEED), end='')
         client.publish(topic=keys.AIO_TEMP_FEED, msg=str(temperature))
-        #client.publish(topic=keys.AIO_HUMID_FEED, msg=str(humidity))
-        #client.publish(topic=keys.AIO_LOG_FEED, msg=str(log_str))
+        client.publish(topic=keys.AIO_HUMID_FEED, msg=str(humidity))
+        client.publish(topic=keys.AIO_LOG_FEED, msg=str(log_str))
         print("DONE")
 
     except Exception as e:
@@ -42,7 +42,7 @@ def send_temp_humid():
 
 
 reed_switch = machine.Pin(26, machine.Pin.IN)
-REED_INTERVAL = 20000
+REED_INTERVAL = 5000
 last_reed_sent = 0  # milliseconds
 
 def send_reed():
